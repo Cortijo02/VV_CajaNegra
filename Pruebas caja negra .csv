@@ -1,0 +1,8 @@
+Valor entrada;Valor esperado
+-2501;null
+-2500;Nodo (-2500)
+-2499;Nodo (-2499)
+0;Nodo (0)
+2498;Nodo (2498)
+2499;Nodo (2499)
+2500;null
