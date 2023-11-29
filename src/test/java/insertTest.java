@@ -1,5 +1,8 @@
 import com.bst.BST;
+import com.exceptions.BetweenLevelException;
 import com.exceptions.DepthException;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,18 +14,19 @@ class insertTest {
             delimiterString = ";")
     void testInsert(int a, boolean recursivo, String esperado, int profundidad) throws DepthException {
         BST arbol = new BST<>();
-        if(profundidad==-1){
-            assertEquals(1,1);
+        for (int i = 0 ; i < profundidad-1 ; i++){
+            arbol.insert(i+1,false);
         }
-        try{
-            for(int i=0;i<profundidad-1;i++) {
-                arbol.insert(i+1, recursivo);
-            }
+        if(esperado.equals("exception")) {
+            assertThrows(DepthException.class, () -> {
+                arbol.insert(a,recursivo);
+            });
+        }else if(esperado.equals("mal")){
+            assertThrows(IllegalArgumentException.class, () -> {
+                arbol.insert(a,recursivo);
+            });
+        }else{
             arbol.insert(a,recursivo);
-        }catch (Exception DepthException){
-            if(esperado.equals("exception")) {
-                assertEquals(0, 0);
-            }
         }
     }
 }
