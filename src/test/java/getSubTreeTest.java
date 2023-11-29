@@ -2,6 +2,8 @@ import com.bst.BST;
 import com.bst.Node;
 import com.exceptions.DepthException;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class getSubTreeTest {
@@ -10,13 +12,19 @@ class getSubTreeTest {
             numLinesToSkip = 1,
             lineSeparator = "\n",
             delimiterString = ";")
-    void testInsert(Node nodo, String esperado) throws DepthException {
+    void testInsert(int a, String esperado) throws DepthException {
         BST arbol = new BST();
+
+        for(int i = 0 ; i < 25; i++){
+            arbol.insert(i+1,true);
+        }
         if(esperado.equals("ok")){
-            arbol.insert(Integer.valueOf(nodo.toString()),true);
+            Node nodo = new Node<>(a);
+            arbol.getSubTree(nodo);
         }else{
-            assertThrows(,() ->{
-               arbol.getSubTree(nodo);
+            assertThrows(IllegalArgumentException.class,()->{
+                Node nodo = new Node<>(a);
+                arbol.getSubTree(nodo);
             });
         }
     }
